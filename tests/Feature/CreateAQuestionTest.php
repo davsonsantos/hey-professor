@@ -12,7 +12,7 @@ it('should be able to create a question bigger than 255 caracters', function () 
     actingAs($user);
 
     //Action - Agir
-    $request = post('/questions.create', [
+    $request = post('/questions/create', [
         'question' => str_repeat('*', 260) . '?',
     ]);
 
