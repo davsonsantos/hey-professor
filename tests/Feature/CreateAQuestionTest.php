@@ -27,6 +27,21 @@ it('should be able to create a question bigger than 255 caracters', function () 
 
 it('should check if ends with the question marker ?', function () {
 
+    //Arrange - Preparar
+    $user = User::factory()->create();
+
+    actingAs($user);
+
+    //Action - Agir
+    $request = post(route("questions.store"), [
+        'question' => str_repeat('*', 10),
+    ]);
+
+    //Assets - verificar
+    $request->assertSessionHasErrors(['question' => 'The question must end with the question marker ?']);
+
+    assertDatabaseCount('questions', 0);
+
 });
 
 it('should have at least 10 caracters', function () {
