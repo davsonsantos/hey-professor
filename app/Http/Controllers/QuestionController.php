@@ -21,6 +21,9 @@ class QuestionController extends Controller
 
                 }],
         ]);
+
+        $t     = "teste";
+        $teste = "teste";
         Question::query()->create($attributes);
 
         return to_route('dashboard');
