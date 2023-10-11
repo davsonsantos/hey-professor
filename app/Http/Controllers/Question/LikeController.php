@@ -11,12 +11,7 @@ class LikeController extends Controller
     public function __invoke(Question $question): RedirectResponse
     {
 
-        Vote::query()->create([
-            'user_id'     => auth()->id(),
-            'question_id' => $question->id,
-            'like'        => true,
-            'unlike'      => false,
-        ]);
+        auth()->user()->like($question);
 
         return back();
     }
