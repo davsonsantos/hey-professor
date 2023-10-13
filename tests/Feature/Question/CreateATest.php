@@ -10,7 +10,7 @@ it('should be able to create a new question bigger than 255 characters', functio
     actingAs($user);
 
     // Act :: agir
-    $request = post(route('question.store'), [
+    $request = post(route('questions.store'), [
         'question' => str_repeat('*', 260) . '?',
     ]);
 
@@ -26,7 +26,7 @@ it('should create as a draft all the time', function () {
     actingAs($user);
 
     // Act :: agir
-    post(route('question.store'), [
+    post(route('questions.store'), [
         'question' => str_repeat('*', 260) . '?',
     ]);
 
@@ -43,7 +43,7 @@ it('should check if ends with question mark ?', function () {
     actingAs($user);
 
     // Act :: agir
-    $request = post(route('question.store'), [
+    $request = post(route('questions.store'), [
         'question' => str_repeat('*', 10),
     ]);
 
@@ -60,7 +60,7 @@ it('should have at least 10 characters', function () {
     actingAs($user);
 
     // Act :: agir
-    $request = post(route('question.store'), [
+    $request = post(route('questions.store'), [
         'question' => str_repeat('*', 8) . '?',
     ]);
 
@@ -70,7 +70,7 @@ it('should have at least 10 characters', function () {
 });
 
 test('only authenticated users can create a new question', function () {
-    post(route('question.store'), [
+    post(route('questions.store'), [
         'question' => str_repeat('*', 8) . '?',
     ])->assertRedirect(route('login'));
 });
@@ -81,7 +81,7 @@ test('question should be unique', function () {
 
     Question::factory()->create(['question' => 'Alguma Pergunta?']);
 
-    post(route('question.store'), [
+    post(route('questions.store'), [
         'question' => 'Alguma Pergunta?',
     ])->assertSessionHasErrors(['question' => 'Pergunta já existe!']);
 });
