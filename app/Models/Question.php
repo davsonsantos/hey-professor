@@ -17,25 +17,14 @@ class Question extends Model
         return $this->hasMany(Vote::class);
     }
 
-    // protected function likes(): Attribute
-    // {
-    //     // return new Attribute(get: function () {
-    //     //     return $this->votes()->sum('like');
-    //     // });
+    public function likes(): Attribute
+    {
+        return new Attribute(get: fn () => $this->votes()->sum('like'));
+    }
 
-    //     return new Attribute(
-    //         get: fn () => $this->votes()->sum('like')
-    //     );
+    public function unlikes(): Attribute
+    {
+        return new Attribute(get: fn () => $this->votes()->sum('unlike'));
+    }
 
-    // }
-
-    // protected function unlikes(): Attribute
-    // {
-    //     // return new Attribute(get: function () {
-    //     //     return $this->votes()->sum('unlike');
-    //     // });
-    //     return new Attribute(
-    //         get: fn () => $this->votes()->sum('unlike')
-    //     );
-    // }
 }

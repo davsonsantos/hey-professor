@@ -6,7 +6,7 @@
     </span>
 
     <div>
-        <x-form :action="route('questions.like', $question)" id="form-like-{{ $question->id }}">
+        <x-form :action="route('questions.like', $question)">
             <button class="flex items-center space-x-2 text-green-500">
                 <x-icons.thumbs-up class="h5 w-5 cursor-pointer hover:text-green-300" id="thumb-up" />
                 <span>{{ $question->likes }}</span>
